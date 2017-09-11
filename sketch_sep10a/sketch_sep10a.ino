@@ -101,14 +101,18 @@ void loop() {
     
 
   if (lock_state == true && array_counter == 4){
-    for (int n; n<5; n++){
-      if (input_passcode[n] == passcode[n]){
+    for (int n=0; n<5; n++){
+      if (input_passcode[0] == passcode[0] && input_passcode[1] == passcode[1] && input_passcode[2] == passcode[2] && input_passcode[3] == passcode[3]){
         Serial.println("Passcode verified");
         myServo.write(0);
         delay(1000);
+        lock_state = false;
+        array_counter = 0;
       }
       if (input_passcode[n] != passcode[n]){
         Serial.println("Incorrect passcode");
+        input_passcode[n] = 0;
+        array_counter = 0;
       }
     }
   } 
